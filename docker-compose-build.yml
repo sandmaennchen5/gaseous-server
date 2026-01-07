@@ -11,7 +11,7 @@ services:
     depends_on:
       - gsdb
     ports:
-      - 5198:80
+      - 5198:8000
     volumes:
       - gs:/home/gaseous/.gaseous-server
     environment:

@@ -2,7 +2,7 @@ FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 ARG TARGETARCH
 ARG BUILDPLATFORM
 WORKDIR /App
-EXPOSE 80
+EXPOSE 8000
 
 RUN echo "Target: $TARGETARCH"
 RUN echo "Build: $BUILDPLATFORM"
@@ -68,7 +68,7 @@ RUN chmod +x /usr/sbin/entrypoint.sh
 VOLUME /home/gaseous/.gaseous-server
 
 # Configure healthcheck
-HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 CMD curl --fail http://localhost:80/api/v1.1/HealthCheck || exit 1
+HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 CMD curl --fail http://localhost:8000/api/v1.1/HealthCheck || exit 1
 
 # start services
 ENTRYPOINT [ "/usr/sbin/entrypoint.sh" ]
